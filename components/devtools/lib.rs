@@ -407,7 +407,7 @@ fn run_server(sender: Sender<DevtoolsControlMsg>,
                 let actors = actors.clone();
                 accepted_connections.push(stream.try_clone().unwrap());
                 spawn_named("DevtoolsClientHandler".to_owned(), move || {
-                    handle_client(actors, stream.try_clone().unwrap())
+                handle_client(actors, stream.try_clone().unwrap())
                 })
             }
             DevtoolsControlMsg::FromScript(ScriptToDevtoolsControlMsg::FramerateTick(
@@ -424,7 +424,7 @@ fn run_server(sender: Sender<DevtoolsControlMsg>,
                 handle_console_message(actors.clone(), id, worker_id, console_message,
                                        &actor_pipelines, &actor_workers),
             DevtoolsControlMsg::FromChrome(ChromeToDevtoolsControlMsg::NetworkEvent(
-                        request_id, network_event)) => {
+                request_id, network_event)) => {
                 // copy the accepted_connections vector
                 let mut connections = Vec::<TcpStream>::new();
                 for stream in &accepted_connections {
